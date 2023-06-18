@@ -1,0 +1,5 @@
+<%= form_with model: @post do |f| %>
+    <div><%= f.label :更新 %></div>
+    <div><%= f.text_area :content, id:"content" %></div>
+    <div><%= f.submit "更新する" %></div>
+<% end %>
