@@ -12,12 +12,14 @@ class PostsController < ApplicationController
   end
   
   def create
+    @post = Post.new
     @post = Post.create(post_params)
     if @post.save
     flash[:notice] = "投稿を作成しました。"
     redirect_to posts_path
     else
-      render "new", status: :unprocessable_entity
+      flash.now[:alert] = "投稿を出来ませんでした"
+      render :new, status: :unprocessable_entity
     end
   end
   
@@ -28,12 +30,19 @@ class PostsController < ApplicationController
   def update
     @post = Post.find_by(id: params[:id])
     @post.update(post_params)
-    redirect_to posts_path
+    if @post.save
+      flash[:notice] ="投稿を編集しました"
+      redirect_to posts_path
+    else
+      flash.now[:alert] = "投稿を編集できませんでした"
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
     @post = Post.find_by(id: params[:id])
     @post.destroy
+    flash[:notice] = "投稿を削除しました"
     redirect_to posts_path
   end
   private
