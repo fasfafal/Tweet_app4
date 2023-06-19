@@ -6,8 +6,8 @@
       <% @post.errors.full_messages.each do |message| %>
 
         <%= message %>
-     </div>
-    <% end %>
+    
+      <% end %>
      <div><%= f.text_area :content %></div>
      <div><%= f.submit "投稿" %></div>
     <% end %>
