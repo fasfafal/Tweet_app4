@@ -2,7 +2,7 @@
 <ul class = "users">
   <% @users.each do |user| %>
     <li>
-      <%= link_to user.name, post.user %>
+      <%= link_to user.name, user_path(user) %>
     </li>
   <% end %>
 </ul>
