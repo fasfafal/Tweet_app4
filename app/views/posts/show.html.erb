@@ -1,12 +1,15 @@
 <div class="main posts-show">
   <div class="container">
     <div class="posts-show-item">
-      <p>
-        <%= @post.content %>
-      </p>
-      <div class = "post-time">
-       <%= @post.created_at %>
+      <div>
+          <%= link_to @user.name,user_path %>
       </div>
+        <p>
+          <%= @post.content %>
+        </p>
+       <div class = "post-time">
+         <%= @post.created_at %>
+       </div>
       <tr>
        <div class = "post-menus">
         <td><%= link_to "編集", edit_post_path %></td>

@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find_by(id: params[:id])
+    @user = @post.user
   end
   
   def new
@@ -12,9 +13,10 @@ class PostsController < ApplicationController
   end
   
   def create
-    @post = Post.new
-    @post = Post.create(post_params)
-    if @post.save
+    post = Post.new
+    post = Post.create(post_params)
+    
+    if post.save
     flash[:notice] = "投稿を作成しました。"
     redirect_to posts_path
     else
@@ -24,13 +26,13 @@ class PostsController < ApplicationController
   end
   
   def edit
-    @post = Post.find_by(id: params[:id])
+    post = Post.find_by(id: params[:id])
   end
 
   def update
-    @post = Post.find_by(id: params[:id])
-    @post.update(post_params)
-    if @post.save
+    post = Post.find_by(id: params[:id])
+    post.update(post_params)
+    if post.save
       flash[:notice] ="投稿を編集しました"
       redirect_to posts_path
     else
@@ -40,13 +42,13 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by(id: params[:id])
-    @post.destroy
+    post = Post.find_by(id: params[:id])
+    post.destroy
     flash[:notice] = "投稿を削除しました"
     redirect_to posts_path
   end
   private
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content).merge(user_id: current_user.id)
   end
 end
