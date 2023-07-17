@@ -3,13 +3,13 @@
     <%= form_with model: @post, local:true do |f| %>
       <div><%= f.label :"投稿する" %></div>
 
-      <% @post.errors.full_messages.each do |message| %>
+        <% @post.errors.full_messages.each do |message| %>
 
-        <%= message %>
+          <%= message %>
     
-      <% end %>
-     <div><%= f.text_area :content %></div>
-     <div><%= f.submit "投稿" %></div>
+        <% end %>
+       <div><%= f.text_area :content %></div>
+       <div><%= f.submit "投稿" %></div>
     <% end %>
   </div>
 </div>
